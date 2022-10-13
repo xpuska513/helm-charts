@@ -11,7 +11,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 4444
+    - port: 5432
       protocol: TCP
   selector:
     {{ include "airbyte.databaseSelectorLabels" . | nindent 4 }}
