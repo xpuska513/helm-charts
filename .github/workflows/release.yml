@@ -46,7 +46,7 @@ jobs:
         with:
           fetch-depth: 0
           ref: "gh_pages"
-          path: "./.github/./.github/airbyte-oss"
+          path: "./.github/airbyte-oss"
 
       - name: Replace semantic version in main chart for deps
         shell: bash
