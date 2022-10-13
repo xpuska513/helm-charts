@@ -1,0 +1,9 @@
+dependencies:
+- name: common
+  repository: https://charts.bitnami.com/bitnami
+  version: 1.17.1
+- name: airbyte-bootloader
+  repository: file://../airbyte-bootloader
+  version: 0.40.18-helm
+digest: sha256:7ddb8a1c270e9a4aa840ae4785e889e26d939a2eedbde7f410e0da9d1b958c9d
+generated: "2022-10-13T14:10:04.597715+03:00"
