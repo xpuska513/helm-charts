@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-22.04
     outputs:
       next-version: ${{ steps.sem-ver.outputs.version }}
-      tag: ${{ steps.sem-ver.outputs.tag }}
+      tag: ${{ steps.sem-ver.outputs.version_tag }}
     steps:
       - uses: actions/checkout@v2
         with:
