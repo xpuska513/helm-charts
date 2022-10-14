@@ -84,6 +84,10 @@ jobs:
           done
           helm repo index ./.github/airbyte-oss/
 
+      - name: Test
+        shell: bash
+        run: git status && sleep 120
+
       - name: Commit and push changes
         uses: EndBug/add-and-commit@v9
         with:
