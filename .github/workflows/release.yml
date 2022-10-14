@@ -72,24 +72,24 @@ jobs:
           add: '.'
           cwd: './.github/airbyte-oss/'
 
-      # - name: "Helm package main chart"
-      #   shell: bash
-      #   run: |
-      #     echo "Waiting for published charts to be synced in helm-charts repo"
-      #     sleep 300
-      #     declare -a StringArray=("airbyte")
-      #     for val in ${StringArray[@]}; do
-      #       cd ./charts/${val} && cat Chart.yaml && helm dep update && cd $GITHUB_WORKSPACE
-      #       helm package ./charts/${val} -d ./.github/airbyte-oss  --version ${{ needs.generate-semantic-version.outputs.next-version }}
-      #     done
-      #     helm repo index ./.github/airbyte-oss/
+      - name: "Helm package main chart"
+        shell: bash
+        run: |
+          echo "Waiting for published charts to be synced in helm-charts repo"
+          sleep 300
+          declare -a StringArray=("airbyte")
+          for val in ${StringArray[@]}; do
+            cd ./charts/${val} && cat Chart.yaml && helm dep update && cd $GITHUB_WORKSPACE
+            helm package ./charts/${val} -d ./.github/airbyte-oss  --version ${{ needs.generate-semantic-version.outputs.next-version }}
+          done
+          helm repo index ./.github/airbyte-oss/
 
-      # - name: Commit and push changes
-      #   uses: EndBug/add-and-commit@v9
-      #   with:
-      #     message: 'Bump release to ${{ needs.generate-semantic-version.outputs.next-version }}'
-      #     add: '.'
-      #     cwd: './.github/airbyte-oss/'
+      - name: Commit and push changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'Bump release to ${{ needs.generate-semantic-version.outputs.next-version }}'
+          add: '.'
+          cwd: './.github/airbyte-oss/'
       
       - name: Commit and push changes
         uses: EndBug/add-and-commit@v9
