@@ -1,0 +1,27 @@
+dependencies:
+- name: common
+  repository: https://charts.bitnami.com/bitnami
+  version: 1.17.1
+- name: airbyte-bootloader
+  repository: https://xpuska513.github.io/helm-charts/
+  version: 0.2.1
+- name: temporal
+  repository: https://xpuska513.github.io/helm-charts/
+  version: 0.2.1
+- name: webapp
+  repository: https://xpuska513.github.io/helm-charts/
+  version: 0.2.1
+- name: server
+  repository: https://xpuska513.github.io/helm-charts/
+  version: 0.2.1
+- name: worker
+  repository: https://xpuska513.github.io/helm-charts/
+  version: 0.2.1
+- name: pod-sweeper
+  repository: https://xpuska513.github.io/helm-charts/
+  version: 0.2.1
+- name: metrics
+  repository: https://xpuska513.github.io/helm-charts/
+  version: 0.2.1
+digest: sha256:cbbc1c4a7b0e578718ac104acde67802c4d14eb9d35e00c3fa3debd687bf948f
+generated: "2022-10-14T09:09:55.126870287Z"
