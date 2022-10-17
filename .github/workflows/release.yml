@@ -32,6 +32,7 @@ jobs:
           format: "${major}.${minor}.${patch}"
           change_path: "./charts"
           bump_each_commit: true
+          namespace: helm
 
   release-chart:
     name: Chart release
