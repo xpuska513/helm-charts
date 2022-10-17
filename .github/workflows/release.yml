@@ -113,14 +113,14 @@ jobs:
           tag: ${{ needs.generate-semantic-version.outputs.tag }}
           new_branch: update-helm-chart-version-ref
       
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+      - name: Run the Action
+        uses: devops-infra/action-pull-request@v0.5.0
         with:
-          path: ./airbyte/
-          branch: update-helm-chart-version-ref
-          base: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          source_branch: update-helm-chart-version-ref
+          target_branch: main
           title: Bump helm chart version reference to ${{ needs.generate-semantic-version.outputs.next-version }}
           body: |
             ## What
             Bump version reference in all Chart.yaml files to ${{ needs.generate-semantic-version.outputs.next-version }}
-          commit-message: Bump helm chart version reference to ${{ needs.generate-semantic-version.outputs.next-version }}
+          allow_no_diff: true
