@@ -16,7 +16,7 @@ jobs:
     name: Generate semantic version
     runs-on: ubuntu-22.04
     outputs:
-      next-version: ${{ steps.sem-ver.outputs.version }}
+      next-version: ${{ steps.ver.outputs.fragment }}
       tag: ${{ steps.sem-ver.outputs.version_tag }}
     steps:
       - uses: actions/checkout@v2
@@ -33,6 +33,13 @@ jobs:
           change_path: "./charts"
           bump_each_commit: true
           namespace: helm
+
+      - name: "Remove -helm from ver number"
+        shell: bash
+        env:
+          VERSION: ${{ steps.sem-ver.outputs.version }}
+        id: ver
+        run: echo "::set-output name=fragment::${VERSION%%-*}"
 
   release-chart:
     name: Chart release
