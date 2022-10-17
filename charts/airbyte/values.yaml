@@ -135,10 +135,10 @@ global:
 
 ##  nameOverride -- String to partially override airbyte.fullname template with a string (will prepend the release name)
 ##
-nameOverride: ""
+nameOverride: "safasf"
 ##  fullnameOverride -- String to fully override airbyte.fullname template with a string
 ##
-fullnameOverride: ""
+fullnameOverride: "asfasf"
 
 ## Pods Service Account
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
