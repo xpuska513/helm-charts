@@ -17,7 +17,7 @@ global:
   ##  database.port -- Database port override
   database:
     secretName: "asfasfasf"
-    secretValue: ""
+    secretValue: "sdfsdfsdf"
     host: "example.com"
     port: "5432"
   state:
