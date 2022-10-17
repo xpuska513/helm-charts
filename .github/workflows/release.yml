@@ -127,6 +127,12 @@ jobs:
           commit-message: Bump helm chart version reference to ${{ needs.generate-semantic-version.outputs.next-version }}
           delete-branch: true
 
+      - name: "Generate changelog"
+        shell: bash
+        id: changelog
+        run: |
+          echo "::set-output name=changelog::$(PAGER=cat git log $(git describe --tags --match "*-helm" $(git rev-list --tags --max-count=1))..HEAD --oneline --decorate=no)"
+
       - name: Create Release
         id: create_release
         uses: ncipollo/release-action@v1
@@ -134,5 +140,7 @@ jobs:
           body: |
             ## What
             Bump version reference in all Chart.yaml files to ${{ needs.generate-semantic-version.outputs.next-version }}
+            CHANGELOG:
+            ${{ steps.changelog.outputs.changelog }}
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ needs.generate-semantic-version.outputs.tag }}
