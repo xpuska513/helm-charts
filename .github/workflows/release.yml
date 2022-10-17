@@ -118,6 +118,7 @@ jobs:
         with:
           path: ./airbyte/
           branch: update-helm-chart-version-ref
+          base: main
           title: Bump helm chart version reference to ${{ needs.generate-semantic-version.outputs.next-version }}
           body: |
             ## What
