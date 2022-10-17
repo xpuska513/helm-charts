@@ -104,23 +104,35 @@ jobs:
           add: '.'
           cwd: './airbyte-oss/'
       
-      - name: Commit and push changes
-        uses: EndBug/add-and-commit@v9
-        with:
-          message: 'Bump release to ${{ needs.generate-semantic-version.outputs.tag }}'
-          add: '.'
-          cwd: './airbyte/'
-          tag: ${{ needs.generate-semantic-version.outputs.tag }}
-          new_branch: update-helm-chart-version-ref
+      # - name: Commit and push changes
+      #   uses: EndBug/add-and-commit@v9
+      #   with:
+      #     message: 'Bump release to ${{ needs.generate-semantic-version.outputs.tag }}'
+      #     add: '.'
+      #     cwd: './airbyte/'
+      #     # tag: ${{ needs.generate-semantic-version.outputs.tag }}
+      #     new_branch: update-helm-chart-version-ref
       
-      - name: Run the Action
-        uses: devops-infra/action-pull-request@v0.5.0
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          source_branch: update-helm-chart-version-ref
-          target_branch: main
+          path: ./airbyte/
+          branch: update-helm-chart-version-ref
+          branch-suffix: random
           title: Bump helm chart version reference to ${{ needs.generate-semantic-version.outputs.next-version }}
           body: |
             ## What
             Bump version reference in all Chart.yaml files to ${{ needs.generate-semantic-version.outputs.next-version }}
-          allow_no_diff: true
+          commit-message: Bump helm chart version reference to ${{ needs.generate-semantic-version.outputs.next-version }}
+          delete-branch: true
+
+      - name: Create Release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        with:
+          body: |
+            ## What
+            Bump version reference in all Chart.yaml files to ${{ needs.generate-semantic-version.outputs.next-version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ needs.generate-semantic-version.outputs.tag }}
