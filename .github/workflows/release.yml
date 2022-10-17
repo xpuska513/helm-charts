@@ -109,6 +109,7 @@ jobs:
         with:
           message: 'Bump release to ${{ needs.generate-semantic-version.outputs.tag }}'
           add: '.'
+          cwd: './airbyte/'
           tag: ${{ needs.generate-semantic-version.outputs.tag }}
           new_branch: update-helm-chart-version-ref
       
