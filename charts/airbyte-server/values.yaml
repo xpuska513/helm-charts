@@ -10,7 +10,7 @@ global:
     secretName: ""
     secretValue: ""
     host: "example.com"
-    port: "5432"
+    port: "54344"
   logs:
     ##  logs.accessKey.password Logs Access Key
     ##  logs.accessKey.existingSecret
