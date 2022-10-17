@@ -104,15 +104,12 @@ jobs:
           add: '.'
           cwd: './airbyte-oss/'
       
-      # - name: Commit and push changes
-      #   uses: EndBug/add-and-commit@v9
-      #   with:
-      #     message: 'Bump release to ${{ needs.generate-semantic-version.outputs.tag }}'
-      #     add: '.'
-      #     cwd: './airbyte/'
-      #     # tag: ${{ needs.generate-semantic-version.outputs.tag }}
-      #     new_branch: update-helm-chart-version-ref
-      
+      - name: "Generate changelog"
+        shell: bash
+        id: changelog
+        run: |
+          echo "::set-output name=changelog::$(PAGER=cat git log $(git describe --tags --match "*-helm" $(git rev-list --tags --max-count=1))..HEAD --oneline --decorate=no)"
+
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
@@ -124,23 +121,14 @@ jobs:
           body: |
             ## What
             Bump version reference in all Chart.yaml files to ${{ needs.generate-semantic-version.outputs.next-version }}
+            CHANGELOG:
+            ${{ steps.changelog.outputs.changelog }}
           commit-message: Bump helm chart version reference to ${{ needs.generate-semantic-version.outputs.next-version }}
           delete-branch: true
 
-      - name: "Generate changelog"
+      - name: Create tag
         shell: bash
-        id: changelog
         run: |
-          echo "::set-output name=changelog::$(PAGER=cat git log $(git describe --tags --match "*-helm" $(git rev-list --tags --max-count=1))..HEAD --oneline --decorate=no)"
-
-      - name: Create Release
-        id: create_release
-        uses: ncipollo/release-action@v1
-        with:
-          body: |
-            ## What
-            Bump version reference in all Chart.yaml files to ${{ needs.generate-semantic-version.outputs.next-version }}
-            CHANGELOG:
-            ${{ steps.changelog.outputs.changelog }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ needs.generate-semantic-version.outputs.tag }}
+          cd ./airbyte/
+          git tag ${{ needs.generate-semantic-version.outputs.tag }}
+          git push origin ${{ needs.generate-semantic-version.outputs.tag }}
