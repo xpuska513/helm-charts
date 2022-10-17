@@ -4,24 +4,24 @@ dependencies:
   version: 1.17.1
 - name: airbyte-bootloader
   repository: https://xpuska513.github.io/helm-charts/
-  version: 0.2.1
+  version: 0.2.3
 - name: temporal
   repository: https://xpuska513.github.io/helm-charts/
-  version: 0.2.1
+  version: 0.2.3
 - name: webapp
   repository: https://xpuska513.github.io/helm-charts/
-  version: 0.2.1
+  version: 0.2.3
 - name: server
   repository: https://xpuska513.github.io/helm-charts/
-  version: 0.2.1
+  version: 0.2.3
 - name: worker
   repository: https://xpuska513.github.io/helm-charts/
-  version: 0.2.1
+  version: 0.2.3
 - name: pod-sweeper
   repository: https://xpuska513.github.io/helm-charts/
-  version: 0.2.1
+  version: 0.2.3
 - name: metrics
   repository: https://xpuska513.github.io/helm-charts/
-  version: 0.2.1
-digest: sha256:cbbc1c4a7b0e578718ac104acde67802c4d14eb9d35e00c3fa3debd687bf948f
-generated: "2022-10-14T09:09:55.126870287Z"
+  version: 0.2.3
+digest: sha256:c26f9e568faf6d52310ab2412408ac4c85cd1c32866e53b48082be4c9dc10943
+generated: "2022-10-14T10:10:45.272035461Z"
